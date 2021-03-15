@@ -4,8 +4,11 @@ import com.in28minutes.database.databasedemo.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -14,6 +17,20 @@ public class PersonJdbcDao {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
+
+    class PersonRowMapper implements RowMapper<Person> {
+
+        @Override
+        public Person mapRow(ResultSet resultSet, int i) throws SQLException {
+            Person person = new Person();
+            person.setId(resultSet.getInt("ID"));
+            person.setName(resultSet.getString("NAME"));
+            person.setLocation(resultSet.getString("LOCATION"));
+            person.setBirthDate(resultSet.getTimestamp("BIRTH_DATE"));
+            return person;
+
+        }
+    }
 
     //select * from person
     public List<Person> findAll() {
@@ -24,7 +41,7 @@ public class PersonJdbcDao {
 
     public Person findById(int id) {
         return jdbcTemplate.queryForObject("SELECT * FROM person WHERE id=?", new Object[] { id },
-                new BeanPropertyRowMapper<Person>(Person.class));
+                new PersonRowMapper());
 
     }
 
