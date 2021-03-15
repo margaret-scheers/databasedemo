@@ -12,7 +12,6 @@ public class Person {
     @GeneratedValue
     private int id;
 
-    @Column(name="name")
     private String name;
     private String location;
     private Date birthDate;
