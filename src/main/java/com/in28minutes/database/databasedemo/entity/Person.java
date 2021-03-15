@@ -1,9 +1,18 @@
 package com.in28minutes.database.databasedemo.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Date;
 
+@Entity
 public class Person {
+    @Id
+    @GeneratedValue
     private int id;
+
+    @Column(name="name")
     private String name;
     private String location;
     private Date birthDate;
@@ -14,6 +23,13 @@ public class Person {
     public Person(int id, String name, String location, Date birthdate) {
         super();
         this.id = id;
+        this.name = name;
+        this.location = location;
+        this.birthDate = birthdate;
+    }
+
+    public Person(String name, String location, Date birthdate) {
+        super();
         this.name = name;
         this.location = location;
         this.birthDate = birthdate;
