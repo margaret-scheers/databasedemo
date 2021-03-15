@@ -26,7 +26,7 @@ public class DatabaseDemoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        //LOGGER.info("All users -> {} ",dao.findAll());
+        LOGGER.info("All users -> {} ", jpa.findAll());
         LOGGER.info("find user 10001-> {} ", jpa.findById (10001));
         jpa.deleteById(10002);
         LOGGER.info("deleted user 10002 ");
