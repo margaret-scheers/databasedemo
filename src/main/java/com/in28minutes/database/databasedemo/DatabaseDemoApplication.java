@@ -27,10 +27,11 @@ public class DatabaseDemoApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         //LOGGER.info("All users -> {} ",dao.findAll());
-        LOGGER.info("find user 10001-> {} ", jpa.findById(10001));
-        //LOGGER.info("deleted user -> {} ",dao.deleteById(10002));
-        //LOGGER.info("insert user -> {} ",dao.insert(new Person(10004, "Tara", "Berlin", new Date())));
-        //LOGGER.info("update user -> {} ",dao.update(new Person(10003, "Pieter", "Utrecht", new Date())));
+        LOGGER.info("find user 10001-> {} ", jpa.findById (10001));
+        jpa.deleteById(10002);
+        LOGGER.info("deleted user 10002 ");
+        LOGGER.info("insert user -> {} ",jpa.insert(new Person(10004, "Tara", "Berlin", new Date())));
+        LOGGER.info("update user -> {} ",jpa.update(new Person(10003, "Pieter", "Utrecht", new Date())));
 
     }
 }
